@@ -78,6 +78,7 @@ object CountDownUtils {
 
     /**
      * 开始倒计时
+     * 单位是分钟
      */
     fun starCountDownByTime(time: Int) {
         totalTime = time * 60 * 1000L

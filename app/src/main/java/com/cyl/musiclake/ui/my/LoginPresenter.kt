@@ -83,7 +83,7 @@ constructor() : BasePresenter<LoginContract.View>(), LoginContract.Presenter {
         loginListener = object : IUiListener {
             override fun onComplete(o: Any) {
                 mView?.hideLoading()
-                //登录成功后回调该方法,可以跳转相关的页面
+                //登录成功后回调该方法,可以跳转相关的页面   然后在LoginActivity的onActivityResult里面处理的回传事件
                 Toast.makeText(activity, "登录成功", Toast.LENGTH_SHORT).show()
                 val `object` = o as JSONObject
                 try {
@@ -120,6 +120,7 @@ constructor() : BasePresenter<LoginContract.View>(), LoginContract.Presenter {
                     Tencent.onActivityResultData(requestCode, resultCode, data, loginListener)
                     Tencent.handleResultData(data, loginListener)
                     val info = UserInfo(mView.context, MusicApp.mTencent.qqToken)
+                    //获取登录用户信息
                     info.getUserInfo(object : IUiListener {
                         override fun onComplete(o: Any) {
                             try {
@@ -129,12 +130,13 @@ constructor() : BasePresenter<LoginContract.View>(), LoginContract.Presenter {
                                 val gender = info.getString("gender")//获取用户性别
                                 val userInfo = User()
                                 userInfo.id = MusicApp.mTencent.openId
+                                //头像地址
                                 userInfo.avatar = iconUrl
                                 userInfo.sex = gender
                                 userInfo.name = nickName
                                 userInfo.nick = nickName
                                 //保存用户信息
-                                userModel!!.savaInfo(userInfo)
+                                userModel?.savaInfo(userInfo)
                                 loginServer(MusicApp.mTencent.accessToken, MusicApp.mTencent.openId, Constants.QQ)
                             } catch (e: JSONException) {
                                 ToastUtils.show("网络异常，请稍后重试！")

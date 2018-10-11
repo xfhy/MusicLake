@@ -119,6 +119,8 @@ object UIUtils {
 
 }
 
+/*------------------------------顶级函数(在哪里都可以调用)--------------------------------------*/
+
 /**
  * 删除歌单
  */
@@ -372,6 +374,7 @@ fun Context.addDownloadQueue(result: Music, isBatch: Boolean = false) {
  * 更新用户Token(主要用于在线歌单)
  */
 fun updateLoginToken() {
+    //请求网络  统一处理
     ApiManager.request(PlaylistApiServiceImpl.checkLoginStatus(),
             object : RequestCallBack<User> {
                 override fun success(result: User?) {

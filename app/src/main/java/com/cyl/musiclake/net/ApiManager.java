@@ -162,11 +162,10 @@ public class ApiManager {
 
 
     /**
-     * 发送网络请求
+     * 发送网络请求    统一发送网络请求  封装起来
      */
     public static <T> void request(Observable<T> service, RequestCallBack<T> result) {
         service.subscribeOn(Schedulers.io())
-                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<T>() {
                     @Override
@@ -182,6 +181,7 @@ public class ApiManager {
 
                     @Override
                     public void onError(Throwable e) {
+                        //集中处理错误  爽歪歪
                         if (e instanceof HttpException) {
                             try {
                                 String string = ((HttpException) e).response().errorBody().string();

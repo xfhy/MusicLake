@@ -111,15 +111,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initCountDownView();
     }
 
-
     /**
      * 使状态栏透明
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private static void transparentStatusBar(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {  //21
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //设置状态栏颜色
             activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
         } else {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -160,6 +160,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         updatePlaySongInfo(PlayManager.getPlayingMusic());
         //加载主fragment
         navigateLibrary.run();
+        //底部控制fragment
         navigatePlay.run();
     }
 
@@ -479,7 +480,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             mSwitchCountDownTv.setVisibility(View.VISIBLE);
         }
     }
-
 
     private void initCountDownView() {
         View numItem = mNavigationView.getMenu().findItem(R.id.nav_menu_online_num).getActionView();

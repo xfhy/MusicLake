@@ -75,6 +75,7 @@ public class UserStatus {
     public static boolean getTokenStatus() {
         SharedPreferences sp = MusicApp.getAppContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         long time = sp.getLong(Constants.TOKEN_TIME, 0L);
+        //小于7天  则返回true
         return (System.currentTimeMillis() - time < 7 * 24 * 60 * 60 * 1000);
     }
 

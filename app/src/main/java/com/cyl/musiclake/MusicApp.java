@@ -85,6 +85,7 @@ public class MusicApp extends TinkerApplication {
         initApplicationComponent();
         LitePal.initialize(this);
         UpdateUtils.init(this);
+        //QQ
         mTencent = Tencent.createInstance(Constants.APP_ID, this);
         initBugly();
         initLogin();

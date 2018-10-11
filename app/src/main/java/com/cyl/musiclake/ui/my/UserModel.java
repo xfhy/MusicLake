@@ -15,7 +15,7 @@ public class UserModel implements UserContract.Model {
 
     @Override
     public void savaInfo(User userInfo) {
-        //保存用户信息
+        //保存用户信息  用户信息是存入SP中的
         UserStatus.saveUserInfo(userInfo);
     }
 
